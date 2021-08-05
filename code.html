@@ -2,7 +2,7 @@
 <html lang="en" class="h-100">
 
 <head>
-    <title>App Name: A Coding Project by Brad Costello</title>
+    <title>RADAR: A Coding Project by Brad Costello</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -24,7 +24,7 @@
     <nav class="navbar navbar-expand-md navbar-dark fixed-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="#"><img src="img/BC_white_mark.svg" class="d-line-block align-text-top"
-                    alt="Brad Costello Logo" width="30" and height="29"> APP NAME</a>
+                    alt="Brad Costello Logo" width="30" and height="29"> RADAR</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -41,7 +41,7 @@
                         <a class="nav-link active" aria-current="page" href="/code.html">The Code</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" target="_blank" href="https://github.com/bearcaffeine/JSSiteTemplate">Git
+                        <a class="nav-link" target="_blank" href="https://github.com/bearcaffeine/Radar">Git
                             Repo</a>
                     </li>
                     <li class="nav-item">
@@ -55,21 +55,59 @@
 
     <main class="flex-shrink-0">
         <div class="container py-5 px-5 mt-5">
-            <h2 class="border-1 border-bottom border-dark">The Code for APP NAME.</h2>
+            <h2 class="border-1 border-bottom border-dark">The Code for RADAR.</h2>
             <div class="row row-cols-1 row-cols-lg-2">
                 <div class="col-lg-8">
                     <pre class="line-numbers"><code class="language-javascript">
-                            //Call Hello World
-                            function HelloWorld(){
-                                alert("hello world");
+                        function getValue(){
+                            document.getElementById("alert").classList.add("invisible");
+                        
+                            let inputString = document.getElementById("userString").value;
+                        
+                            inputString = inputString.toLowerCase().replace(/[^A-Za-z]/g, '');
+                        
+                            let palindrome = palindromeString(inputString);
+                        
+                            displayString(palindrome, inputString);
+                        }
+                        
+                        function palindromeString(inputString){
+                            let palinString = [];
+                        
+                            for (let i = inputString.length-1; i >= 0; i--){
+                                palinString += inputString[i];
                             }
+                        
+                            return palinString;
+                        
+                        }
+                        
+                        function displayString(palinString, inputString){
+                            let orgString = inputString;
+                            let palindromeString = palinString;
+                        
+                            if (palinString === orgString){
+                                document.getElementById("message").innerHTML = `Success, <strong>${palinString}</strong> is a Palindrome!`;
+                                document.getElementById("alert").classList.remove("invisible");
+                            } else {
+                                document.getElementById("message").innerHTML = `Sorry, <strong>${palinString}</strong> is not a Palindrome!`;
+                                document.getElementById("alert").classList.remove("invisible");
+                            }
+                        
+                        }
                     </code>
                     </pre>
                 </div>
                 <div class="col-lg-4">
                     <p>The Code is structed in one function.</p>
-                    <h5>Hello World</h5>
-                    <p>Hello World is a function that displays an alert with a message of "Hello World".</p>
+                    <h5>getValue()</h5>
+                    <p>This function first sets the alert section of the html page to invisible. Next we get the user input value from the app page and assign it to inputString. Then we clean the inputString to remove spaces and any values that are not string value using regex expression. Once the data has been cleaned we pass the value to palindromeString and then pass the palindrome to displayString function.</p>
+
+                    <h5>palindromeString()</h5>
+                    <p>In this function we reverse the string using a for loop and then pass the value back to getValue function.</p>
+
+                    <h5>displayString()</h5>
+                    <p>In this function we pass two parameters the new reversed string and the orignal input string so we can check if the values match. If the values match then the input string is a palindrome and we send a success message to the app page. If they do not match we send an incorrect message stating the input string is not a palindrome.</p>
                 </div>
             </div>
         </div>
