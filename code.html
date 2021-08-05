@@ -64,35 +64,38 @@
                         
                             let inputString = document.getElementById("userString").value;
                         
-                            inputString = inputString.toLowerCase().replace(/[^A-Za-z]/g, '');
+                            let returnObj = checkForPalindrome(inputString);
                         
-                            let palindrome = palindromeString(inputString);
-                        
-                            displayString(palindrome, inputString);
+                            displayString(returnObj);
                         }
                         
-                        function palindromeString(inputString){
+                        function checkForPalindrome(inputString){
                             let palinString = [];
+                            let returnObj = {};
+                        
+                            inputString = inputString.toLowerCase().replace(/[^a-z0-9]/g, '');
                         
                             for (let i = inputString.length-1; i >= 0; i--){
                                 palinString += inputString[i];
                             }
                         
-                            return palinString;
+                            if (inputString === palinString) {
+                                returnObj.msg = "Well done! You've entered a palindrome!"
+                            } else {
+                                returnObj.msg = "Sorry! You did not enter a palindrome!"
+                            }
+                        
+                            returnObj.reverse = palinString;
+                        
+                            return returnObj;
                         
                         }
                         
-                        function displayString(palinString, inputString){
-                            let orgString = inputString;
-                            let palindromeString = palinString;
-                        
-                            if (palinString === orgString){
-                                document.getElementById("message").innerHTML = `Success, <strong>${palinString}</strong> is a Palindrome!`;
-                                document.getElementById("alert").classList.remove("invisible");
-                            } else {
-                                document.getElementById("message").innerHTML = `Sorry, <strong>${palinString}</strong> is not a Palindrome!`;
-                                document.getElementById("alert").classList.remove("invisible");
-                            }
+                        function displayString(returnObj){
+                            
+                            document.getElementById("alertHeader").innerHTML = returnObj.msg;
+                            document.getElementById("message").innerHTML = `Your phrase reversed is: ${returnObj.reverse}`;
+                            document.getElementById("alert").classList.remove("invisible");    
                         
                         }
                     </code>
@@ -101,13 +104,13 @@
                 <div class="col-lg-4">
                     <p>The Code is structed in one function.</p>
                     <h5>getValue()</h5>
-                    <p>This function first sets the alert section of the html page to invisible. Next we get the user input value from the app page and assign it to inputString. Then we clean the inputString to remove spaces and any values that are not string value using regex expression. Once the data has been cleaned we pass the value to palindromeString and then pass the palindrome to displayString function.</p>
+                    <p>This function first sets the alert section of the html page to invisible. Next we get the user input value from the app page and assign it to inputString. Next we create an object variable to store the results from checkForPalindrome. Then we pass the object variable to displayString.</p>
 
-                    <h5>palindromeString()</h5>
-                    <p>In this function we reverse the string using a for loop and then pass the value back to getValue function.</p>
+                    <h5>checkForPalindrome()</h5>
+                    <p>In this function we clean the inputString to remove spaces and any special characters. Next we reverse the inputString and store the results in palinString. Next we check if the palinString and inputString are equal. We store a message in the returnObj object variable and then store the reverse version, palinString, into the reverse parameter in returnObj. Finally we return the returnObj object back to getValue.</p>
 
                     <h5>displayString()</h5>
-                    <p>In this function we pass two parameters the new reversed string and the orignal input string so we can check if the values match. If the values match then the input string is a palindrome and we send a success message to the app page. If they do not match we send an incorrect message stating the input string is not a palindrome.</p>
+                    <p>In this function we take the returnObj object and reference the message and resverse parameter and pass the html commands back the app page for displaying the results.</p>
                 </div>
             </div>
         </div>

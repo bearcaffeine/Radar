@@ -3,34 +3,37 @@ function getValue(){
 
     let inputString = document.getElementById("userString").value;
 
-    inputString = inputString.toLowerCase().replace(/[^A-Za-z]/g, '');
+    let returnObj = checkForPalindrome(inputString);
 
-    let palindrome = palindromeString(inputString);
-
-    displayString(palindrome, inputString);
+    displayString(returnObj);
 }
 
-function palindromeString(inputString){
+function checkForPalindrome(inputString){
     let palinString = [];
+    let returnObj = {};
+
+    inputString = inputString.toLowerCase().replace(/[^a-z0-9]/g, '');
 
     for (let i = inputString.length-1; i >= 0; i--){
         palinString += inputString[i];
     }
 
-    return palinString;
+    if (inputString === palinString) {
+        returnObj.msg = "Well done! You've entered a palindrome!"
+    } else {
+        returnObj.msg = "Sorry! You did not enter a palindrome!"
+    }
+
+    returnObj.reverse = palinString;
+
+    return returnObj;
 
 }
 
-function displayString(palinString, inputString){
-    let orgString = inputString;
-    let palindromeString = palinString;
-
-    if (palinString === orgString){
-        document.getElementById("message").innerHTML = `Success, <strong>${palinString}</strong> is a Palindrome!`;
-        document.getElementById("alert").classList.remove("invisible");
-    } else {
-        document.getElementById("message").innerHTML = `Sorry, <strong>${palinString}</strong> is not a Palindrome!`;
-        document.getElementById("alert").classList.remove("invisible");
-    }
+function displayString(returnObj){
+    
+    document.getElementById("alertHeader").innerHTML = returnObj.msg;
+    document.getElementById("message").innerHTML = `Your phrase reversed is: ${returnObj.reverse}`;
+    document.getElementById("alert").classList.remove("invisible");    
 
 }
