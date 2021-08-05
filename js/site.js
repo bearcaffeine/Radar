@@ -12,7 +12,7 @@ function checkForPalindrome(inputString){
     let palinString = [];
     let returnObj = {};
 
-    inputString = inputString.toLowerCase().replace(/[^a-z0-9]/g, '');
+    inputString = inputString.toLowerCase().replace(/[^a-z]/g, '');
 
     for (let i = inputString.length-1; i >= 0; i--){
         palinString += inputString[i];
